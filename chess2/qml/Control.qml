@@ -3,6 +3,8 @@ import VPlay 2.0
 import QtQuick 2.7
 import QtQml 2.2
 
+//控制骰子和飞机飞行，以及相关算法
+//董梦丹
 EntityBase {
     id: control
     entityType: "Control"
@@ -278,6 +280,22 @@ EntityBase {
                     Plane.i += 4
                 }
                 if(random1.number !== 6)Plane.jumped = !Plane.jumped
+
+                for(the_indexnumber=Plane.i;the_indexnumber!=(Plane.i-random1.number);
+                    the_indexnumber--){
+                    for(the_mapnumber=0;the_mapnumber!=chessmap.length;the_mapnumber++){
+                        if(chessmap[the_mapnumber].x === Plane.index[the_indexnumber].x &&
+                                chessmap[the_mapnumber].y === Plane.index[the_indexnumber].y &&
+                                chessmap[the_mapnumber]!== Plane &&
+                                chessmap[the_mapnumber].type !== Plane.type)
+                        {
+                            //                        chessmap[the_mapnumber].x = chessmap[the_mapnumber].initx
+                            //                        chessmap[the_mapnumber].y = chessmap[the_mapnumber].inity
+                            chessmap[the_mapnumber].i = 0
+                            chessmap[the_mapnumber].state = "Airport"
+                        }
+                    }
+                }
             }
             //限制不同飞机
             if(random1.number !== 6){

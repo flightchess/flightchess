@@ -24,8 +24,8 @@ NetWork::NetWork (QObject *parent):QObject{parent}
         my_address = QHostAddress(QHostAddress::LocalHost).toString();
         myserver = NULL;
         client1 = NULL;
-        client2 = NULL;
-        client3 = NULL;
+//        client2 = NULL;
+//        client3 = NULL;
     }
 }
 
@@ -65,27 +65,27 @@ void NetWork::server_New_Connect()
         qDebug()<<"client1 connect!";
     }
 
-    if(Connect_Num==2){
-        client2 = myserver->nextPendingConnection();
-        connect(client2,&QTcpSocket::readyRead,this,[&](){
-            connect(client2,&QTcpSocket::readyRead,[&](){
-                QByteArray byteDate =  client2->readAll();
-                emit sendInformation(byteDate);
-            });
-        });
-        qDebug()<<"client2 connect!";
-    }
+//    if(Connect_Num==2){
+//        client2 = myserver->nextPendingConnection();
+//        connect(client2,&QTcpSocket::readyRead,this,[&](){
+//            connect(client2,&QTcpSocket::readyRead,[&](){
+//                QByteArray byteDate =  client2->readAll();
+//                emit sendInformation(byteDate);
+//            });
+//        });
+//        qDebug()<<"client2 connect!";
+//    }
 
-    if(Connect_Num==3){
-        client3 = myserver->nextPendingConnection();
-        connect(client3,&QTcpSocket::readyRead,this,[&](){
-            connect(client1,&QTcpSocket::readyRead,[&](){
-                QByteArray byteDate =  client1->readAll();
-                emit sendInformation(byteDate);
-            });
-        });
-        qDebug()<<"client3 connect!";
-    }
+//    if(Connect_Num==3){
+//        client3 = myserver->nextPendingConnection();
+//        connect(client3,&QTcpSocket::readyRead,this,[&](){
+//            connect(client1,&QTcpSocket::readyRead,[&](){
+//                QByteArray byteDate =  client1->readAll();
+//                emit sendInformation(byteDate);
+//            });
+//        });
+//        qDebug()<<"client3 connect!";
+//    }
 }
 
 void NetWork::openClient1(const QString ipaddress)
@@ -95,16 +95,16 @@ void NetWork::openClient1(const QString ipaddress)
     client1->waitForConnected(TIMEOUT);
 }
 
-void NetWork::openClient2(const QString ipaddress)
-{
-    client2 = new QTcpSocket(this);
-    client2->connectToHost(QHostAddress(ipaddress),PORT);
-    client2->waitForConnected(TIMEOUT);
-}
+//void NetWork::openClient2(const QString ipaddress)
+//{
+//    client2 = new QTcpSocket(this);
+//    client2->connectToHost(QHostAddress(ipaddress),PORT);
+//    client2->waitForConnected(TIMEOUT);
+//}
 
-void NetWork::openClient3(const QString ipaddress)
-{
-    client3 = new QTcpSocket(this);
-    client3->connectToHost(QHostAddress(ipaddress),PORT);
-    client3->waitForConnected(TIMEOUT);
-}
+//void NetWork::openClient3(const QString ipaddress)
+//{
+//    client3 = new QTcpSocket(this);
+//    client3->connectToHost(QHostAddress(ipaddress),PORT);
+//    client3->waitForConnected(TIMEOUT);
+//}

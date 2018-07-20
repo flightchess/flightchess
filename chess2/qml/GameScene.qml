@@ -1,6 +1,8 @@
 import QtQuick 2.0
 import VPlay 2.0
 
+//游戏界面
+//董梦丹
 Scene {
     width: 700
     height: 700

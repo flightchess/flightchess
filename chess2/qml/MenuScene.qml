@@ -4,7 +4,8 @@ import QtQuick.Controls 2.2
 import QtQuick.Particles 2.0
 
 
-//import QtQuick.Layouts 1.3
+//菜单界面
+//杨哲杨森
 Scene {
     id: menuScene
 

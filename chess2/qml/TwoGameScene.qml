@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import VPlay 2.0
-
+//双人模式界面
+//董梦丹
 Scene {
     width: 700
     height: 700

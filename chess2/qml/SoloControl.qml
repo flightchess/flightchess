@@ -2,7 +2,8 @@ import QtQuick 2.0
 import VPlay 2.0
 import QtQuick 2.7
 import QtQml 2.2
-
+//单人模式控制
+//董梦丹
 EntityBase {
     id: control
     entityType: "SoloControl"

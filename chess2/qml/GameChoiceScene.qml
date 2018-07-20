@@ -2,6 +2,8 @@ import QtQuick 2.0
 import VPlay 2.0
 import QtQuick.Controls 2.2
 
+//选择几人模式的界面
+//董梦丹
 Scene {
     id:gameChoiceScene
     width:gameScene.width
@@ -10,7 +12,7 @@ Scene {
     signal gameScenePressed
     signal netScenePressed
     signal soloGameScenePressed
-    signal twoGameScenePressed
+
     Image {
         anchors.fill:gameWindowAnchorItem
         source:"../assets/choice.jpg"
@@ -32,15 +34,16 @@ Scene {
             id:twoButton
             text:"1 v 1"
             onClicked:{
-                twoGameScenePressed()
+                netScenePressed()
+
             }
         }
 
         Button {
             id:netButton
-            text:"LAN connect"
+            text:"Four people"
             onClicked:{
-                netScenePressed()
+                gameScenePressed()
             }
         }
     }

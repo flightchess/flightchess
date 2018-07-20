@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import VPlay 2.0
-
+//设置界面
+//杨森
 Scene {
     width: 500
     height: 500

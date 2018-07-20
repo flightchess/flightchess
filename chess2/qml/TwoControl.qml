@@ -2,7 +2,8 @@ import QtQuick 2.0
 import VPlay 2.0
 import QtQuick 2.7
 import QtQml 2.2
-
+//双人模式控制
+//董梦丹
 EntityBase {
     id: control
     entityType: "TwoControl"
@@ -10,7 +11,7 @@ EntityBase {
     property int the_indexnumber:0
     property int time:6
     property int blue_landing:0
-    property int red_landing:0
+    property int yellow_landing:0
 
     property var chessmap: []
 
@@ -46,8 +47,8 @@ EntityBase {
     }
 
     Text {
-        id:redtext
-        text:red_landing.toString()
+        id:yellowtext
+        text:yellow_landing.toString()
         color:"white"
         font.pixelSize:15
         x:gameScene.width/15*9
@@ -59,10 +60,10 @@ EntityBase {
         chessmap[1]=blue2
         chessmap[2]=blue3
         chessmap[3]=blue4
-        chessmap[4]=red1
-        chessmap[5]=red2
-        chessmap[6]=red3
-        chessmap[7]=red4
+        chessmap[4]=yellow1
+        chessmap[5]=yellow2
+        chessmap[6]=yellow3
+        chessmap[7]=yellow4
     }
 
     function move(Plane){
@@ -79,14 +80,14 @@ EntityBase {
                         if(chessmap[the_mapnumber].type === "blue"){
                             chessmap[the_mapnumber].enabled=false
                         }
-                        if(chessmap[the_mapnumber].type === "red"){
+                        if(chessmap[the_mapnumber].type === "yellow"){
                             chessmap[the_mapnumber].enabled=true
                         }
                         random1.x=gameScene.width/15*9
-                        random1.y=gameScene.width/15*3
+                        random1.y=gameScene.width/15*11
                     }
-                    if(Plane.type === "red"){
-                        if(chessmap[the_mapnumber].type === "red"){
+                    if(Plane.type === "yellow"){
+                        if(chessmap[the_mapnumber].type === "yellow"){
                             chessmap[the_mapnumber].enabled=false
                         }
                         if(chessmap[the_mapnumber].type === "blue"){
@@ -123,7 +124,26 @@ EntityBase {
                 Plane.x = Plane.index[29].x
                 Plane.y = Plane.index[29].y
                 Plane.i += 12
-
+                if(Plane.type === "blue"){
+                    if(chessmap[the_mapnumber].type === "yellow"){
+                        if(chessmap[the_mapnumber].x === gameScene.width/15*14- gameScene.width / 18 && chessmap[the_mapnumber].y === gameScene.width/15*7){
+                            //                                chessmap[the_mapnumber].x = chessmap[the_mapnumber].initx
+                            //                                chessmap[the_mapnumber].y = chessmap[the_mapnumber].inity
+                            chessmap[the_mapnumber].i = 0
+                            chessmap[the_mapnumber].state = "Airport"
+                        }
+                    }
+                }
+                if(Plane.type === "yellow"){
+                    if(chessmap[the_mapnumber].type === "blue"){
+                        if(chessmap[the_mapnumber].x === gameScene.width/15*4- gameScene.width / 18 && chessmap[the_mapnumber].y === gameScene.width/15*7){
+                            //                                chessmap[the_mapnumber].x = chessmap[the_mapnumber].initx
+                            //                                chessmap[the_mapnumber].y = chessmap[the_mapnumber].inity
+                            chessmap[the_mapnumber].i = 0
+                            chessmap[the_mapnumber].state = "Airport"
+                        }
+                    }
+                }
             }
             //检测终点
             else if (Plane.i + random1.number > 56) {
@@ -144,15 +164,15 @@ EntityBase {
                     }
 
                 }
-                if(Plane.type === "red"){
+                if(Plane.type === "yellow"){
                     Plane.x = gameScene.width / 15 * 7 - gameScene.width / 18
                     Plane.y = gameScene.width / 15 * 6
                     Plane.state = "Landing"
                     control.time = 6
                     count.start()
-                    red_landing += 1
-                    if(red_landing === 4){
-                        redtext.text="全部成功抵达"
+                    yellow_landing += 1
+                    if(yellow_landing === 4){
+                        yellowtext.text="全部成功抵达"
                     }
                 }
             }
@@ -164,6 +184,22 @@ EntityBase {
                     Plane.i += 4
                 }
                 if(random1.number !== 6)Plane.jumped = !Plane.jumped
+                //collision
+                for(the_indexnumber=Plane.i;the_indexnumber!=(Plane.i-random1.number);
+                    the_indexnumber--){
+                    for(the_mapnumber=0;the_mapnumber!=chessmap.length;the_mapnumber++){
+                        if(chessmap[the_mapnumber].x === Plane.index[the_indexnumber].x &&
+                                chessmap[the_mapnumber].y === Plane.index[the_indexnumber].y &&
+                                chessmap[the_mapnumber]!== Plane &&
+                                chessmap[the_mapnumber].type !== Plane.type)
+                        {
+                            //                        chessmap[the_mapnumber].x = chessmap[the_mapnumber].initx
+                            //                        chessmap[the_mapnumber].y = chessmap[the_mapnumber].inity
+                            chessmap[the_mapnumber].i = 0
+                            chessmap[the_mapnumber].state = "Airport"
+                        }
+                    }
+                }
             }
             //限制不同飞机
             if(random1.number !== 6){
@@ -172,14 +208,14 @@ EntityBase {
                         if(chessmap[the_mapnumber].type === "blue"){
                             chessmap[the_mapnumber].enabled=false
                         }
-                        if(chessmap[the_mapnumber].type === "red"){
+                        if(chessmap[the_mapnumber].type === "yellow"){
                             chessmap[the_mapnumber].enabled=true
                         }
                         random1.x=gameScene.width/15*9
                         random1.y=gameScene.width/15*3
                     }
-                    if(Plane.type === "red"){
-                        if(chessmap[the_mapnumber].type === "red"){
+                    if(Plane.type === "yellow"){
+                        if(chessmap[the_mapnumber].type === "yellow"){
                             chessmap[the_mapnumber].enabled=false
                         }
                         if(chessmap[the_mapnumber].type === "blue"){
@@ -280,65 +316,67 @@ EntityBase {
             }}}
 
     Plane {
-        id: red1
-        initx: gameScene.width/15*13
-        inity: gameScene.width/15*1
+        id: yellow1
+        initx: gameScene.width/15*12
+        inity: gameScene.width/15*13
         state: "Airport"
-        type:"red"
-        enabled:false
-        Image {source: "../assets/fly2.png"}
-        MouseArea {
-            anchors.fill: red1
-            onClicked: {
-                red1.b()
-                control.move(red1)
-            }}}
-
-    Plane {
-        id: red2
-        initx: gameScene.width/15*14
-        inity: gameScene.width/15*1
-        state: "Airport"
-        type:"red"
-        enabled:false
-        Image {source: "../assets/fly_red1.png"}
-        MouseArea {
-            anchors.fill: red2
-            onClicked: {
-                red2.b()
-                control.move(red2)
-            }}}
-
-    Plane {
-        id: red3
-        initx: gameScene.width/15*13
-        inity: gameScene.width/15*2
-        state: "Airport"
-        type:"red"
+        type:"yellow"
         enabled:false
         Image {
-            source: "../assets/fly_red2.png"
+            source: "../assets/fly_yellow1.png"
         }
         MouseArea {
-            anchors.fill: red3
+            anchors.fill: yellow1
             onClicked: {
-                red3.b()
-                control.move(red3)
+                yellow1.d()
+                control.move(yellow1)
             }}}
     Plane {
-        id: red4
-        initx: gameScene.width/15*14
-        inity: gameScene.width/15*2
+        id: yellow2
+        initx: gameScene.width/15*13
+        inity: gameScene.width/15*13
         state: "Airport"
-        type:"red"
+        type:"yellow"
         enabled:false
         Image {
-            source: "../assets/fly_red3.png"
+            source: "../assets/fly_yellow2.png"
         }
         MouseArea {
-            anchors.fill: red4
+            anchors.fill: yellow2
             onClicked: {
-                red4.b()
-                control.move(red4)
+                yellow2.d()
+                control.move(yellow2)
+            }}}
+    Plane {
+        id: yellow3
+        initx: gameScene.width/15*12
+        inity: gameScene.width/15*14
+        state: "Airport"
+        type:"yellow"
+        enabled:false
+        Image {
+            source: "../assets/fly_yellow3.png"
+        }
+        MouseArea {
+            anchors.fill: yellow3
+            onClicked: {
+                yellow3.d()
+                control.move(yellow3)
+            }}}
+    Plane {
+        id: yellow4
+        initx: gameScene.width/15*13
+        inity: gameScene.width/15*14
+        state: "Airport"
+        type:"yellow"
+        enabled:false
+        Image {
+            source: "../assets/fly1.png"
+        }
+        MouseArea {
+            anchors.fill: yellow4
+            onClicked: {
+                yellow4.d()
+                control.move(yellow4)
             }}}
 }

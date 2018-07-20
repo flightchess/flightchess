@@ -2,7 +2,8 @@ import QtQuick 2.0
 import VPlay 2.0
 import network 1.0
 import QtQuick.Controls 2.2
-
+//网络界面
+//董梦丹
 Scene {
     id:netScene
     width:700
@@ -10,6 +11,7 @@ Scene {
     visible:false
 
     signal gameScenePressed
+    signal twoGameScenePressed
 
     Image {
         anchors.fill: parent.gameWindowAnchorItem
@@ -37,8 +39,8 @@ Scene {
             onClicked:{
                 ipinput.visible=true
                 connectButton1.visible=true
-                connectButton2.visible=true
-                connectButton3.visible=true
+//                connectButton2.visible=true
+//                connectButton3.visible=true
                 playButton.visible=true
             }
         }
@@ -59,7 +61,7 @@ Scene {
         x:netScene.width/3
         y:netScene.height/3+90
         onClicked:{
-            gameScenePressed()
+            twoGameScenePressed()
         }
     }
 
@@ -80,25 +82,25 @@ Scene {
             mynetwork.openClient1(ipinput.text)
         }
     }
-    Button {
-        id:connectButton2
-        text:"connect2"
-        x:netScene.width/3+180
-        y:netScene.height/3+180
-        visible:false
-        onClicked:{
-            mynetwork.openClient2(ipinput.text)
-        }
-    }
-    Button {
-        id:connectButton3
-        text:"connect3"
-        x:netScene.width/3+180
-        y:netScene.height/3+270
-        visible:false
-        onClicked:{
-            mynetwork.openClient3(ipinput.text)
-        }
-    }
+//    Button {
+//        id:connectButton2
+//        text:"connect2"
+//        x:netScene.width/3+180
+//        y:netScene.height/3+180
+//        visible:false
+//        onClicked:{
+//            mynetwork.openClient2(ipinput.text)
+//        }
+//    }
+//    Button {
+//        id:connectButton3
+//        text:"connect3"
+//        x:netScene.width/3+180
+//        y:netScene.height/3+270
+//        visible:false
+//        onClicked:{
+//            mynetwork.openClient3(ipinput.text)
+//        }
+//    }
 
 }

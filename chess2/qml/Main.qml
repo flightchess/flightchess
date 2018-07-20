@@ -1,7 +1,8 @@
 import VPlay 2.0
 import QtQuick 2.0
 import network 1.0
-
+//游戏窗口，加载不同界面
+//董梦丹杨哲杨森
 GameWindow {
     id: gameWindow
     screenWidth: gameScene.width
@@ -158,12 +159,13 @@ GameWindow {
         onGameScenePressed: gameWindow.state = "game"
         onNetScenePressed: gameWindow.state = "net"
         onSoloGameScenePressed: gameWindow.state = "solo"
-        onTwoGameScenePressed: gameWindow.state = "two"
+
     }
 
     NetScene {
         id:netScene
         onGameScenePressed:gameWindow.state = "game"
+        onTwoGameScenePressed: gameWindow.state = "two"
     }
 
     NetWork {

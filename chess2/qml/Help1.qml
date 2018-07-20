@@ -2,6 +2,8 @@ import QtQuick 2.0
 import VPlay 2.0
 import QtQuick.Particles 2.0
 
+//帮助文档界面
+//杨哲
 Scene {
     width: 500
     height: 500

@@ -1,7 +1,8 @@
 import QtQuick 2.0
 import VPlay 2.0
 import QtQuick.Controls 2.2
-
+//骰子类
+//董梦丹
 EntityBase {
     width:gameScene.width/18
     height:gameScene.width/18

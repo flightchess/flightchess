@@ -1,6 +1,7 @@
 import QtQuick 2.0
 import VPlay 2.0
-
+//单人模式界面
+//董梦丹
 Scene {
     id:sologameScene
     width: 700
